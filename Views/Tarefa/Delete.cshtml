@@ -1,0 +1,35 @@
+@model sistemaAgendamento.Models.TarefaModel
+@{
+    ViewData["Title"] = "Confirmar Exclusão";
+}
+
+<div class="container mt-4">
+  <h5 class="mb-3 text-danger">Deseja realmente excluir esta tarefa?</h5>
+
+  <div class="card shadow-sm border-danger">
+    <div class="card-body">
+      <dl class="row mb-3">
+        <dt class="col-sm-3">Título:</dt>
+        <dd class="col-sm-9">@Model.Titulo</dd>
+
+        <dt class="col-sm-3">Descrição:</dt>
+        <dd class="col-sm-9">@Model.Descricao</dd>
+
+        <dt class="col-sm-3">Data:</dt>
+        <dd class="col-sm-9">@Model.Data.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Status:</dt>
+        <dd class="col-sm-9">@((Model.Status) ? "Concluída" : "Pendente")</dd>
+      </dl>
+
+      <form asp-action="DeleteConfirmed" asp-controller="Tarefa" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="d-flex justify-content-end">
+          <a asp-action="Index" class="btn btn-secondary btn-sm me-2">Cancelar</a>
+          <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+@using System.Text.Json
+@model IEnumerable<sistemaAgendamento.Models.TarefaModel>
+
+@{
+    ViewData["Title"] = "Lista de Tarefas";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+
+    <!-- Linha única: título / buscar / botão -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- 1. Título -->
+        <h5 class="mb-0">Minhas Tarefas</h5>
+
+        <!-- 2. Caixa de busca -->
+        <div class="input-group flex-fill mx-3" style="max-width: 400px;">
+            <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Buscar tarefa..."
+                oninput="buscarTarefa()"
+            />
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                onclick="buscarTarefa()"
+            >
+                🔍 Buscar
+            </button>
+        </div>
+
+        <!-- 3. Botão Nova Tarefa -->
+        <a asp-controller="Tarefa"
+           asp-action="Create"
+           class="btn btn-primary">
+            Nova Tarefa
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-2">
+            <div class="table-responsive">
+                <table id="tabelaTarefas" class="table table-sm table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tarefas = @Html.Raw(
+        JsonSerializer.Serialize(
+            Model.Select(t => new {
+                t.Id,
+                t.Titulo,
+                t.Descricao,
+                Data = t.Data.ToShortDateString(),
+                Status = t.Status ? "Concluída" : "Pendente"
+            })
+        )
+    );
+
+    function renderizarTabela(lista) {
+        const tbody = document.querySelector('#tabelaTarefas tbody');
+        tbody.innerHTML = '';
+
+        if (lista.length === 0) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td colspan="6" class="text-center text-muted py-3">
+                    Nenhuma tarefa encontrada.
+                </td>`;
+            tbody.appendChild(tr);
+            return;
+        }
+
+        lista.forEach(t => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${t.Id}</td>
+                <td>${t.Titulo}</td>
+                <td>${t.Descricao}</td>
+                <td>${t.Data}</td>
+                <td>${t.Status}</td>
+                <td class="text-end">
+                    <a href="/Tarefa/Details/${t.Id}" class="btn btn-sm btn-outline-info me-1">Detalhes</a>
+                    <a href="/Tarefa/Edit/${t.Id}"     class="btn btn-sm btn-outline-warning me-1">Editar</a>
+                    <a href="/Tarefa/Delete/${t.Id}"   class="btn btn-sm btn-outline-danger">Excluir</a>
+                </td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function buscarTarefa() {
+        const termo = document.getElementById('searchInput')
+            .value
+            .trim()
+            .toLowerCase();
+
+        const filtradas = tarefas.filter(t => {
+            return t.Titulo.toLowerCase().includes(termo)
+                || t.Descricao.toLowerCase().includes(termo);
+        });
+
+        renderizarTabela(filtradas);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderizarTabela(tarefas);
+    });
+</script>

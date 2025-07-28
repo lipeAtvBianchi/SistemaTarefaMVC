@@ -1,0 +1,42 @@
+# Build e artefatos de compilação
+bin/
+obj/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Arquivos de publicação do IIS
+*.Publish.xml
+
+# Secrets do .NET Core (user secrets)
+secrets.json
+
+# Logs e banco SQLite (se houver)
+*.log
+*.db
+*.sqlite
+
+# Pacotes e dependências
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Ferramentas de teste
+TestResults/
+*.trx
+
+# Arquivos gerados pelo Rider/Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# WebStorm / IDEs JetBrains
+*.iml

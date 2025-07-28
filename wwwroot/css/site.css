@@ -1,0 +1,153 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+
+
+
+
+#themeToggleBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.dark-theme #themeToggleBtn {
+  background-color: #90caf9;
+  color: #1e1e1e;
+}
+
+.dark-theme {
+  background-color: #121212; /* Fundo geral */
+  color: #f5f5f5;            /* Texto padrão */
+}
+
+.dark-theme table {
+  background-color: #1e1e1e;
+  color: #fff;
+  border-collapse: collapse;
+}
+
+.dark-theme tr {
+  background-color: #1e1e1e;
+}
+
+.dark-theme td {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.dark-theme th {
+  background-color: #2c2c2c;
+  color: #90caf9;
+  border: 1px solid #444;
+}
+
+.dark-theme .card, .dark-theme , .dark-theme .box {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  box-shadow: none;
+}
+
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+  color: #aaa;
+}
+
+#themeToggleBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+#themeToggleBtn:hover {
+  transform: scale(1.05);
+}
+
+body {
+  transition: background-color .2s ease, color .2s ease;
+}
+
+table, th, td,
+.card, .container, .box,
+input, textarea, button {
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  transition: all 0.3s ease;
+}
+
+.search-box button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-box button:hover {
+  background-color: #45a049;
+}
